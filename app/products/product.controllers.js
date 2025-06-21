@@ -24,7 +24,7 @@ const getAllProducts = catchAsync(async(req,res) => {
 
 const getProductById = catchAsync(async (req,res) => {
   const id = req.params.id
-    const result = await ProductService.getProductByIdById(id);
+    const result = await ProductService.getProductById(id);
      sendResponse(res,200,true,"Product by id fetched successfully",result)
 
 }); 
@@ -33,7 +33,7 @@ const getProductById = catchAsync(async (req,res) => {
 
 const deleteProductById = catchAsync(async (req,res) => {
   const id = req.params.id
-    const result = await ProductService.deleteProuctById(id);
+    const result = await ProductService.deleteProductById(id);
      sendResponse(res,200,true,"Product by id delete successfully",result)
 
 });
@@ -41,7 +41,7 @@ const deleteProductById = catchAsync(async (req,res) => {
 const updateProductById = catchAsync(async(req,res) =>{
   const id = req.params.id
     const payload = req.body
-    const result = await ProductService.updateProductById(id);
+    const result = await ProductService.updateProductById(id,payload);
      sendResponse(res,200,true,"Product by id upadate successfully",result)
 
   });

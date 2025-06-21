@@ -9,57 +9,47 @@ if(!result){
 }
 return result;
 };
-const singleProduct = async (payload) =>{
-    const {email, password} = payload
-
-    if(!email || !password){
-        throw new Error("Please provide email and password")
-    }
 
 
-    const isExist = await Product.findOne({email})
-    if(!isExist){
-        throw new Error("Email is wrong!")
-    }
+const singleProduct = async (id) =>{
+  
+  const result = await Product.findById(id);
+  if (!result) {
+    throw new Error("Product not found");
+  }
+  return result;
+};
+const getAllProducts = async () => {
+  const result = await Product.find({}).sort({ createdAt: -1 }); 
+  return result;
+};
 
 
-    const isPasswordCorrect = await bcrypt.compare(password, isExist.password)
+const getProductById = async (id) => {
+  const result = await Product.findById(id);
+  if (!result) {
+    throw new Error("Product not found");
+  }
+  return result;
+};
 
-    if(!isPasswordCorrect){
-        throw new Error("Password is wrong!")
-    }
 
-    return isExist
+const deleteProductById = async (id) => {
+  const result = await Product.findByIdAndDelete(id);
+  if (!result) {
+    throw new Error("Failed to delete the product");
+  }
+  return result;
+};
 
-}
+const updateProductById = async (id, payload) => {
+  const result = await Product.findByIdAndUpdate(id, payload, { new: true }); 
+  if (!result) {
+    throw new Error("Failed to update the product");
+  }
+  return result;
+};
 
-const getAllProducts = async () =>{
-    const result = await User.find({}).sort({createdAt: -1})
-    return result
-}
-
-const getProductById = async(id) =>{
-    const result = await User.findById(id)
-    return result
-}
-
-const deleteProductById = async(id) =>{
-    const result = await User.findByIdAndDelete(id)
-
-    if(!result){
-        throw new Error("Failed to delete the user!")
-    }
-
-    return result
-}
-
-const updateProductById = async(id, payload) => {
-    const result = await User.findByIdAndUpdate(id, payload, {new: true})
-    if(!result){
-        throw new Error("Failed to update the user!")
-    }
-    return result
-}
 
 const ProductService ={
     createProduct,

@@ -1,12 +1,14 @@
 const UserService = require("./user.service");
 const catchAsync = require("../../shared/catchAsync");
 const sendResponse = require("../../shared/sendResponse");
-const createUser = catchAsync(async (req, res) => {
+
+
+const createUser =catchAsync(async (req, res) => {
   
     const payload = req.body;
     const result = await UserService.createUser(payload);
 
-     sendResponse(res,200,true,"sign  fetched successfully",result)
+         sendResponse(res,200,true,"sign  fetched successfully",result)
 
 });
 
