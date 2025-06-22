@@ -50,8 +50,11 @@ const updateProductById = async (id, payload) => {
   return result;
 };
 
-
+const uploadFile =(payload) => {
+    return payload
+}
 const ProductService ={
+    uploadFile,
     createProduct,
      singleProduct,
   getAllProducts,

@@ -5,11 +5,14 @@ const ProductRoute = require("./app/products/product.routers")
 const port = 5000
 const userRoute = require('./app/users/user.route')
 const dbConnect = require('./db/dbconnect')
- 
+ const path = require('path')
 app.use(cors())
 app.use(express.json())
   
 dbConnect();
+ 
+  app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use('/api/users',userRoute)
 app.use("/api/products",ProductRoute)
 

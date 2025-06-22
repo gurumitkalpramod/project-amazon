@@ -46,7 +46,15 @@ const updateProductById = catchAsync(async(req,res) =>{
 
   });
 
+  const uploadFile = catchAsync(async(req,res) =>{
+    const payload = req.file;
+    const result = await ProductService.uploadFile(payload);
+     sendResponse(res,200,true,"file uploaded successfully",result)
+
+  });
+
 const Productcontrollers ={
+    uploadFile,
     createProduct,
     singleProduct,
   getAllProducts,
